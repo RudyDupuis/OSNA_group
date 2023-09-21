@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>										
+	<Resource
+		name="jdbc/pool_cnx"		
+		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		type="javax.sql.DataSource"
+		url="jdbc:sqlserver://localhost:1433;databaseName=OSNA_DB;trustservercertificate=true"       	
+		username="OSNA"		
+		password="anso"
+		maxTotal="100"					
+		maxIdle="30"	 	
+		maxWaitMillis="10000" 
+	/>
+</Context>
