@@ -1,0 +1,167 @@
+@font-face {
+  font-family: "main";
+  src: url(../FONTS/Merienda-VariableFont_wght.ttf);
+  font-display: swap;
+}
+
+h1 {
+	font-family: main;
+	font-size: 25px;
+	font-weight: 400;
+	text-align: center;
+	padding: 48px 0;
+	color:#343434;
+}
+
+h2 {
+	font-family: main;
+	font-size: 20px;
+	font-weight: 350;
+	color:#343434;
+}
+
+h3 {
+	font-family: main;
+	font-size: 16px;
+	font-weight: 700;
+	color:#343434;
+}
+
+p {
+	font-family: Arial;
+	font-size: 14px;
+	color:#343434;
+}
+
+/***** Normalize *****/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+body {
+  background: #F6FFF2;
+  min-height: 100vh;
+}
+
+/***** Componants *****/
+
+/* NAV */
+nav {
+	background: #55A630;
+	height: 96px;
+	width: 100%;
+	padding: 0 64px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-family: main;	
+}
+
+nav a {
+	color: #F6FFF2;
+	font-size: 16px;
+}
+
+nav a:hover {
+	color: #DDDF00;
+}
+
+.nav-logo {
+	font-size: 25px;
+}
+
+.nav-space {
+	margin-left: 32px;
+}
+
+@media (max-width: 500px) {
+	nav {
+		padding: 0 32px;
+	}
+	nav a {
+		font-size: 12px;
+	}
+	
+	.nav-space {
+		margin-left: 16px;
+	}
+}
+
+/* FOOTER */
+footer {
+	height: 96px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #DDDF00;
+}
+
+/* BUTTON */
+[type="submit"], button {
+	width: 360px;
+	padding: 16px;
+	font-family: main;
+	font-size: 16px;
+	color: #F6FFF2;
+	background:#55A630;
+	border: none;
+	border-radius: 10px;
+}
+
+[type="submit"]:hover , button:hover {
+	cursor: pointer;
+	background: #DDDF00;
+	color: #343434;
+}
+
+.btn-secondary {
+	background: #DDDF00;
+	color: #343434;
+}
+
+.btn-secondary:hover {
+	background:#E5E5E5;
+}
+
+@media (max-width: 500px) {
+	[type="submit"], button {
+		width: 85vw;
+	}
+}
+
+/* INPUTS */
+input {
+	font-family: Arial;
+	color:#343434;
+	border: 1px solid #343434;
+	border-radius: 10px;
+	background :#F6FFF2;
+	padding: 10px 16px;
+	width: 360px;
+}
+
+input:focus {
+	border: 2px solid #DDDF00;
+}
+
+@media (max-width: 500px) {
+	input {
+		width: 85vw;
+	}
+}
+
+/* p message */
+.message {
+	color: #DF7800;
+	text-align: center;
+	padding: 32px 0;
+	font-weight: bold;
+}

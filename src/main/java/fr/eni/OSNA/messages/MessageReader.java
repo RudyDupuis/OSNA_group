@@ -7,7 +7,7 @@ public abstract class MessageReader {
 	
 	static {
 		try {
-			rb = ResourceBundle.getBundle("fr.eni.OSNA.code-messages.messages");
+			rb = ResourceBundle.getBundle("fr.eni.OSNA.messages.code-messages");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

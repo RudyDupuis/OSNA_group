@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>OSNA - Vendre un article</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/STYLE/CSS/settings.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/STYLE/CSS/sellingPage.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -22,16 +26,27 @@
 	
 	<form method="POST" action="" enctype="multipart/form-data">
 		<div class="form-top">
-			<div class="img"></div>
+			<c:if test="${article == null}">
+				<div class="img"></div>
+			</c:if>
 			
+			<c:if test="${article != null}">
+				<c:url var="imageServletURL" value="/imageServlet">
+    				<c:param name="articleId" value="${article.id}" />
+				</c:url>
+				
+				<div class="img" style="background: url(${imageServletURL}) center center / cover"></div>
+			</c:if>
+			
+
 			<div class="form-top-center">
-				<input type="text" placeholder="Nom de l'article" name="title" value="${article.title}" required/>
+				<input type="text" placeholder="Nom de l'article" name="name" value="${article.name}" required/>
 				
 				<select name="categorie" required>
-  					<option value="home" ${article.categorie == 'home' ? 'selected' : ''}>Maison</option>
-  					<option value="garden" ${article.categorie == 'garden' ? 'selected' : ''}>Jardin</option>
-  					<option value="electronics" ${article.categorie == 'electronics' ? 'selected' : ''}>Électronique</option>
-  					<option value="clothing" ${article.categorie == 'clothing' ? 'selected' : ''}>Vêtements</option>
+  					<option value="Maison" ${article.categorie == 'Maison' ? 'selected' : ''}>Maison</option>
+  					<option value="Jardin" ${article.categorie == 'Jardin' ? 'selected' : ''}>Jardin</option>
+  					<option value="Electronique" ${article.categorie == 'Electronique' ? 'selected' : ''}>Électronique</option>
+  					<option value="Vetement" ${article.categorie == 'Vetement' ? 'selected' : ''}>Vêtements</option>
 				</select>
 
 				
@@ -46,15 +61,15 @@
 			<input type="date" placeholder="Date de début" name="startDate" value="${article.startDate}" required/>
 			<input type="date" placeholder="Date de fin" name="endDate" value="${article.endDate}" required/>
 		</div>
-		
+
 		<div>
 			<h2>Retrait</h2>
 			<input type="text" placeholder="Rue" value="${article.street != null ? article.street : sessionScope.user.street}" name="street" required/>
-			<input type="number" placeholder="Code Postal" value="${article.postalCode != 0 ? article.postalCode : sessionScope.user.postalCode}" name="postalCode" required/>
+			<input type="number" placeholder="Code Postal" value="${article.postalCode != null ? article.postalCode : sessionScope.user.postalCode}" name="postalCode" required/>
 			<input type="text" placeholder="Ville" name="city" value="${article.city != null ? article.city : sessionScope.user.city}" required/>
 		</div>
 		
-		<input type="hidden" value="${article.id}" name="idArticle">
+		<input type="hidden" value="${article.id}" name="articleId">
 
 		<c:if test="${article == null}">
 			<input type="hidden" value="create" name="action">
@@ -69,7 +84,7 @@
 	
 	<c:if test="${article != null}">
 		<form action="" method="POST">
-			<input type="hidden" value="${article.id}" name="idArticle">
+			<input type="hidden" value="${article.id}" name="articleId">
 			<input type="hidden" value="delete" name="action">
 			<input type="hidden" value="${sure != null ? sure : false }" name="sure">
 			<input type="submit" value="Annuler la vente" class="btn-delete"/>

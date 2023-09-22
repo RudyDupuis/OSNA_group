@@ -1,0 +1,135 @@
+header {
+	width: 100%;
+	height: calc(100vh - 96px);
+	background: url(../IMG/home-bg.jpg) center center / cover;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+header p {
+	font-size: 25px;
+	color: #F6FFF2;
+}
+
+.title {
+	font-size: 60px;
+	color: #F6FFF2;
+	margin-bottom: 64px;
+}
+
+.filter-unconnected {
+	width: 100%;
+	height: 128px;
+	background: #DDDF00;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.filter-unconnected-submit {
+	width: 192px;
+}
+
+.filter-unconnected-submit:hover {
+	background:#E5E5E5;
+}
+
+.filter-unconnected-search {
+	width: 300px;
+	border: none;
+}
+
+select {
+	padding: 8px 96px 8px 8px;
+	background: #F6FFF2;
+	border-radius: 10px;
+}
+
+.filter-connected {
+	width: 100%;
+	height: 128px;
+	background: #E5E5E5;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.filter-connected-btn {
+	width: 224px;
+	background-color: #DDDF00;
+	color: #343434; 
+}
+
+.filter-connected-btn:hover {
+	background-color: #F6FFF2;
+}
+
+.auction-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	padding: 32px;
+}
+
+.auction-list-empty {
+	padding: 128px 0;
+	text-align: center;
+}
+
+.article-card {
+	background: #F6F6F6;
+	border-radius: 10px;
+	padding: 16px 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 450px;
+	justify-self: center;
+}
+
+.article-card-img {
+	width: 160px;
+	height: 160px;
+	background: url(../IMG/empty-img.png) center center / cover;
+	border-radius: 8px;
+}
+
+.article-card-p {
+	margin-top: 16px;
+}
+
+.article-card-p strong {
+	font-family: main;
+}
+
+.article-card-btns {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 200px;
+}
+
+.article-card-submit {
+	font-size: 14px;
+	width: 96px;
+	height: 40px;
+	margin-top: 8px;
+	padding: 0;
+}
+
+.article-card-noOffer {
+	margin-top: 16px;
+}
+
+@media (max-width: 1000px) {
+	header {
+		flex-direction: column;
+		justify-content: space-evenly;
+	}
+}
+
+@media (max-width: 600px) {
+	header p {
+		font-size: 20px;
+	}
+}
