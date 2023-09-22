@@ -7,7 +7,7 @@ import fr.eni.OSNA.dal.ArticleDAO;
 import fr.eni.OSNA.dal.DAOFactory;
 
 public class ArticleManager {
-private static ArticleManager instance;
+	private static ArticleManager instance;
 	
 	public static ArticleManager getInstance() {
 		if(instance == null) {
