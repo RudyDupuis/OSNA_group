@@ -3,8 +3,9 @@ package fr.eni.OSNA.dal;
 import java.util.List;
 
 public interface DAO<T> {
-    void insert(T  t) throws Exception;
 
+	void insert( T p ) throws Exception;
+	
     void update(T t) throws Exception;
 
     void deleteById(int id) throws Exception;
