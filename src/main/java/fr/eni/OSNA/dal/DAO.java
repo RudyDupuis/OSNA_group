@@ -2,14 +2,15 @@ package fr.eni.OSNA.dal;
 
 import java.util.List;
 
-public interface DAO<T> {
-    void insert(T  t) throws Exception;
+public interface DAO<T, I> {
+	
+	public abstract void insert(T  t) throws Exception;
 
-    void update(T t) throws Exception;
+	public abstract void update(T t) throws Exception;
 
-    void deleteById(int id) throws Exception;
+	public abstract void deleteById(I id) throws Exception;
 
-    T selectById(int id) throws Exception;
+	public abstract T selectById(I id) throws Exception;
 
-    List<T> selectAll() throws Exception;
+	public abstract List<T> selectAll() throws Exception;
 }

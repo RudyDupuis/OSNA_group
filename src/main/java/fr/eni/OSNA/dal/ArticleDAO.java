@@ -1,5 +1,7 @@
 package fr.eni.OSNA.dal;
 
-public interface ArticleDAO {
+import fr.eni.OSNA.bo.Article;
+
+public interface ArticleDAO extends DAO<Article, Integer> {
 
 }
