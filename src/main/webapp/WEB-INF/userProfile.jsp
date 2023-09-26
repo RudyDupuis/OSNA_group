@@ -8,11 +8,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/STYLE/CSS/settings.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/STYLE/CSS/userProfile.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="${pageContext.request.contextPath}/STYLE/IMG/Favicon.png"/>
 </head>
 <body>
-	<jsp:include page="Componants/Nav.jsp">
-		<jsp:param value="true" name="connection" />
-	</jsp:include>
+	<jsp:include page="Componants/Nav.jsp" />
+	
 	<main>
 		<h1>Profil de ${user.pseudo}</h1>
 	

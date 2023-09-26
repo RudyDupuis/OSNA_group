@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:if test="${param.connection}">
+<c:set var="userExists" value="${not empty sessionScope.user}" />
+
+<c:if test="${userExists}">
 	<nav>
 		<a href="${pageContext.request.contextPath}/" class="nav-logo">OSNA</a>
 		<div>
@@ -10,7 +12,7 @@
 	</nav>
 </c:if>
 
-<c:if test="${!param.connection}">
+<c:if test="${!userExists}">
 	<nav>
 		<a href="${pageContext.request.contextPath}/" class="nav-logo">OSNA</a>
 		<div>
