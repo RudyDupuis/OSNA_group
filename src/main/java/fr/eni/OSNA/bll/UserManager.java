@@ -36,4 +36,7 @@ public class UserManager {
 	public User login(String id, String password) throws Exception {
 		return dao.login(id, password);
 	}
+	public String getPseudo(int id) throws Exception {
+        return dao.getPseudo(id);
+    }
 }

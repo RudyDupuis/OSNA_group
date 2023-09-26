@@ -158,4 +158,25 @@ public class UserDaoJdbcImpl implements UserDAO {
 		
 		return user;
 	}
+
+	public String getPseudo(int id) throws Exception {
+    String Sql = "SELECT pseudo FROM users WHERE id = ?";
+    String pseudo = null;
+
+    try(Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(Sql)) {
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            pseudo = rs.getString("pseudo");
+        } 
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_SELECT));
+    }
+
+    return pseudo;
+	}
+	
 }

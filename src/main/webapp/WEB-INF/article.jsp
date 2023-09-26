@@ -16,7 +16,7 @@
 		<jsp:param value="${userExists}" name="connection" />
 	</jsp:include>
 
-	<h1>${article.title}</h1>
+	<h1>${article.name}</h1>
 
 	<section class="article">
 		<div class="article-top">
@@ -31,7 +31,7 @@
 			<c:if test="${article.bestOffer != 0}">
 				<p>
 					<strong>Meilleur offre : </strong> ${article.bestOffer} points par <a
-						href="${pageContext.request.contextPath}/profil-utilisateur?userId=${article.idUserOffer}">${article.idUserOffer}</a>
+						href="${pageContext.request.contextPath}/profil-utilisateur?userId=${article.idUserBestOffer}">${article.idUserBestOffer}</a>
 				</p>
 			</c:if>
 			<c:if test="${article.bestOffer == 0}">
@@ -46,7 +46,7 @@
 				<strong>Retrait : </strong> ${article.street} ${article.postalCode} ${article.city}
 			</p>
 			<p class="article-center-right">
-				<strong>Vendeur : </strong> <a href="${pageContext.request.contextPath}/profil-utilisateur?userId=${article.idSeller}">${article.idSeller}</a>
+				<strong>Vendeur : </strong> <a href="${pageContext.request.contextPath}/profil-utilisateur?userId=${article.idSeller}">${article.nameSeller}</a>
 			</p>
 			<p>
 				<strong>Fin de l'enchère : </strong>${article.endDate}</p>
@@ -54,7 +54,7 @@
 		
 		<c:if test="${userExists && sessionScope.user.id != article.idSeller}">
 			<form method="POST" action="">
-				<input type="hidden" value="${article.id}" name="idArticle" />
+				<input type="hidden" value="${article.id}" name="articleId" />
 				<input type="number" placeholder="${article.bestOffer != 0 ? article.bestOffer + 5 : article.startingPrice + 5} Points" name="points" />
 				<input type="submit" value="Faire une offre" />
 			</form>
