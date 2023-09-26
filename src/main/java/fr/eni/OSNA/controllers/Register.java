@@ -54,5 +54,6 @@ public class Register extends HttpServlet {
 	}
 	
 	private void errorDirection(HttpServletRequest request,  HttpServletResponse response, String message) throws ServletException, IOException {
+	
 	}
 }

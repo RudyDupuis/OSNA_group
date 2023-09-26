@@ -28,7 +28,7 @@ public class UserDaoJdbcImpl implements UserDAO {
 			ps.setString(index++, user.getMail());
 			ps.setString(index++, user.getPhone());
 			ps.setString(index++, user.getStreet());
-			ps.setInt	(index++, user.getpostalCode());
+			ps.setInt	(index++, user.getPostalCode());
 			ps.setString(index++, user.getCity());
 			ps.setString(index++, user.getPassword());
 			ps.setInt	(index++, 0);
@@ -61,9 +61,10 @@ public class UserDaoJdbcImpl implements UserDAO {
 			ps.setString(index++, user.getMail());
 			ps.setString(index++, user.getPhone());
 			ps.setString(index++, user.getStreet());
-			ps.setInt(index++, user.getpostalCode());
+			ps.setInt   (index++, user.getPostalCode());
 			ps.setString(index++, user.getCity());
 			ps.setString(index++, user.getPassword());
+			ps.setInt   (index++, user.getId());
 			
 			ps.executeUpdate();
 

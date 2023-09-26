@@ -25,11 +25,51 @@ public class MyProfile extends HttpServlet {
 		String action = request.getParameter("action");
 
 		User userSession = (User) request.getSession().getAttribute("user");
+		
 		int userId = userSession.getId();
-
+		
 		if ("update".equals(action)) {
+
+			if (!request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
+				request.setAttribute("message", "Les deux mots de passe ne sont pas identiques");
+				doGet(request, response);
+					
+				}  else {
 			
-			
+					User user = new User(
+							userId,
+						    request.getParameter("pseudo"),
+						    request.getParameter("firstName"),
+					        request.getParameter("lastName"),
+					        request.getParameter("mail"),
+					        request.getParameter("phone"),
+					        request.getParameter("street"),
+					        Integer.valueOf(request.getParameter("postalCode")),
+					        request.getParameter("city"),
+					        request.getParameter("password")
+					        );
+					
+					try {
+						userManager.update(user);
+						User userConnected = userManager.login(user.getPseudo(), user.getPassword());
+						request.getSession().setAttribute("user", userConnected);
+						request.setAttribute("message", "Votre compte à été mis à jour");
+						doGet(request, response);
+	
+					} catch (Exception e) {
+						
+							request.setAttribute("pseudoValue", user.getPseudo());
+					        request.setAttribute("firstNameValue", user.getFirstName());
+					        request.setAttribute("lastNameValue", user.getLastName());
+					        request.setAttribute("mailValue", user.getMail());
+					        request.setAttribute("phoneValue", user.getPhone());
+					        request.setAttribute("streetValue", user.getStreet());
+					        request.setAttribute("postalCodeValue", user.getPostalCode());
+					        request.setAttribute("cityValue", user.getCity());
+					        
+						doGet(request, response);
+					}
+				}
 		}
 
 		if ("disconnection".equals(action)) {

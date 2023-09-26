@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>OSNA - Profil utilisateur</title>
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/STYLE/CSS/settings.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/STYLE/CSS/userProfile.css">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>

@@ -1,0 +1,27 @@
+.points {
+	text-align: center;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+.points strong {
+	font-family: main;
+}
+
+.update-form,
+.other-btns {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-wrap: wrap; 
+}
+
+input {
+	margin: 10px 20px 20px 0px;
+}
+
+
+.other-btns-delete {
+	background-color: #DF7800;
+}
+

@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>OSNA - Créer un compte</title>
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/STYLE/CSS/settings.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/STYLE/CSS/register.css">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -18,7 +24,7 @@
 		<div>
 			<h2>Nom et Prénom</h2>
 			<div>
-				<input type="text" placeholder="Prénom" name="firstName" value="${firstNameSave}" required />
+				<input type="text" placeholder="Prénom" name="firstName" value="${firstNameSave}" maxlength="30" required />
 				<input type="text" placeholder="Nom" name="lastName" value="${lastNameSave}" required />
 			</div>
 			

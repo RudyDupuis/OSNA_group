@@ -29,6 +29,20 @@ public class User {
 		this.points = points;
 	}
 	
+	public User(int id, String pseudo, String firstName, String lastName, String mail, String phone, String street,
+			int postalCode, String city, String password) {
+		this.id = id;
+		this.pseudo = pseudo;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mail = mail;
+		this.phone = phone;
+		this.street = street;
+		this.postalCode = postalCode;
+		this.city = city;
+		this.password = password;
+	}
+	
 	public User(String pseudo, String firstName, String lastName, String mail, String phone, String street,
 			int postalCode, String city, String password) {
 		this.pseudo = pseudo;
@@ -41,6 +55,8 @@ public class User {
 		this.city = city;
 		this.password = password;
 	}
+	
+	
 
 	public int getId() {
 		return id;
@@ -98,11 +114,11 @@ public class User {
 		this.street = street;
 	}
 
-	public int getpostalCode() {
+	public int getPostalCode() {
 		return postalCode;
 	}
 
-	public void setpostalCode(int postalCode) {
+	public void setPostalCode(int postalCode) {
 		this.postalCode = postalCode;
 	}
 
