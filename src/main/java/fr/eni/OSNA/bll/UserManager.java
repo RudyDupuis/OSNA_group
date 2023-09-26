@@ -36,4 +36,14 @@ public class UserManager {
 	public User login(String id, String password) throws Exception {
 		return dao.login(id, password);
 	}
+	
+	public String getPseudo(int id) throws Exception {
+		return dao.getPseudo(id);
+	}
+	
+	public void updatePoints(User user, int Offer, String action) throws Exception {
+		dao.updatePoints(user);
+	}
+	
+	
 }

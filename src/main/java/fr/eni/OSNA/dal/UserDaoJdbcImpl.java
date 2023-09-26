@@ -28,7 +28,7 @@ public class UserDaoJdbcImpl implements UserDAO {
 			ps.setString(index++, user.getMail());
 			ps.setString(index++, user.getPhone());
 			ps.setString(index++, user.getStreet());
-			ps.setInt	(index++, user.getpostalCode());
+			ps.setInt	(index++, user.getPostalCode());
 			ps.setString(index++, user.getCity());
 			ps.setString(index++, user.getPassword());
 			ps.setInt	(index++, 0);
@@ -61,10 +61,11 @@ public class UserDaoJdbcImpl implements UserDAO {
 			ps.setString(index++, user.getMail());
 			ps.setString(index++, user.getPhone());
 			ps.setString(index++, user.getStreet());
-			ps.setInt(index++, user.getpostalCode());
+			ps.setInt(index++, user.getPostalCode());
 			ps.setString(index++, user.getCity());
 			ps.setString(index++, user.getPassword());
 			
+			ps.setInt(index++, user.getId());
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -157,5 +158,43 @@ public class UserDaoJdbcImpl implements UserDAO {
 		}
 		
 		return user;
+	}
+	
+	@Override
+	public void updatePoints(User user) throws Exception {
+		//TODO
+	}
+
+	@Override
+	public Boolean checkUniqueMail(User user) throws Exception {
+		//TODO
+		return false;
+	}
+
+	@Override
+	public Boolean checkUniquePseudo(User user) throws Exception {
+		//TODO
+		return false;
+	}
+
+	@Override
+	public String getPseudo(int id) throws Exception {
+		String Sql = "SELECT pseudo FROM users WHERE id = ?";
+		String pseudo = null;
+		
+		try(Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(Sql)) {
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				pseudo = rs.getString("pseudo");
+			} 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_SELECT));
+		}
+		
+		return pseudo;
 	}
 }

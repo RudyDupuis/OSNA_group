@@ -6,10 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>OSNA - Vendre un article</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/STYLE/CSS/settings.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/STYLE/CSS/sellingPage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/STYLE/CSS/settings.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/STYLE/CSS/sellingPage.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -40,7 +38,7 @@
 			
 
 			<div class="form-top-center">
-				<input type="text" placeholder="Nom de l'article" name="name" value="${article.name}" required/>
+				<input type="text" placeholder="Nom de l'article" name="name" value="${article.name}" maxlength="30" required/>
 				
 				<select name="categorie" required>
   					<option value="Maison" ${article.categorie == 'Maison' ? 'selected' : ''}>Maison</option>
@@ -49,24 +47,28 @@
   					<option value="Vetement" ${article.categorie == 'Vetement' ? 'selected' : ''}>Vêtements</option>
 				</select>
 
-				
-				<input type="file" placeholder="Ajouter une image" name="image" required/>
+				<c:if test="${article.image == null}">
+					<input type="file" placeholder="Ajouter une image" accept=".jpg" name="image" required/>
+				</c:if>
+				<c:if test="${article.image != null}">
+					<input type="file" placeholder="Ajouter une image" accept=".jpg" name="image"/>
+				</c:if> 
 			</div>
 			
-			<textarea placeholder="Description" name="description" required>${article.description}</textarea>
+			<textarea placeholder="Description" name="description" maxlength="500" required>${article.description}</textarea>
 		</div>
 		
 		<div class="form-center">
-			<input type="text" placeholder="Mise à prix" name="startingPrice" value="${article.startingPrice}" required/>
+			<input type="number" placeholder="Mise à prix" name="startingPrice" value="${article.startingPrice}" required/>
 			<input type="date" placeholder="Date de début" name="startDate" value="${article.startDate}" required/>
 			<input type="date" placeholder="Date de fin" name="endDate" value="${article.endDate}" required/>
 		</div>
 
-		<div>
+		<div class="form-bottom">
 			<h2>Retrait</h2>
-			<input type="text" placeholder="Rue" value="${article.street != null ? article.street : sessionScope.user.street}" name="street" required/>
-			<input type="number" placeholder="Code Postal" value="${article.postalCode != null ? article.postalCode : sessionScope.user.postalCode}" name="postalCode" required/>
-			<input type="text" placeholder="Ville" name="city" value="${article.city != null ? article.city : sessionScope.user.city}" required/>
+			<input type="text" placeholder="Rue" value="${article.street != null ? article.street : sessionScope.user.street}" name="street" maxlength="255" required/>
+			<input type="number" placeholder="Code Postal" value="${article.postalCode != null ? article.postalCode : sessionScope.user.postalCode}" name="postalCode" min="10000" min="99999" required/>
+			<input type="text" placeholder="Ville" name="city" value="${article.city != null ? article.city : sessionScope.user.city}" maxlength="100" required/>
 		</div>
 		
 		<input type="hidden" value="${article.id}" name="articleId">

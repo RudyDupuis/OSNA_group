@@ -3,6 +3,7 @@ package fr.eni.OSNA.bll;
 import java.util.List;
 
 import fr.eni.OSNA.bo.Article;
+import fr.eni.OSNA.bo.User;
 import fr.eni.OSNA.dal.ArticleDAO;
 import fr.eni.OSNA.dal.DAOFactory;
 
@@ -39,8 +40,12 @@ public class ArticleManager {
 		dao.deleteById(id);
 	}
 	
-	public void updateOffer(int bestOffer, int idUserOffer, int idArticle) throws Exception {
-		dao.updateOffer(bestOffer, idUserOffer, idArticle);
+	public void updateOffer(int bestOffer, User userOffer, int idArticle) throws Exception {
+		dao.updateOffer(bestOffer, userOffer, idArticle);
+	}
+	
+	public void updatePickedUp(int articleId) throws Exception {
+		dao.updatePickedUp(articleId);
 	}
 	
 	public List<Article> selectByCategorie(String categorie) throws Exception {

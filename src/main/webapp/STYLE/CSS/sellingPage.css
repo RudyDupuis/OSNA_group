@@ -70,3 +70,29 @@ h2 {
 .btn-delete {
 	background: #DF7800;;
 }
+
+@media (max-width: 1400px) {
+	.form-top {
+		flex-direction: column;
+	}
+	
+	.form-top-center {
+		margin: 32px 0;
+	}
+}
+
+@media (max-width: 1200px) {
+	.form-center {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.form-bottom {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.form-center input, .form-bottom input {
+		margin: 16px 0;
+	}
+}

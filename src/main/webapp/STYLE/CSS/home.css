@@ -68,6 +68,7 @@ select {
 .auction-list {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
+	gap: 32px;
 	padding: 32px;
 }
 
@@ -121,15 +122,62 @@ select {
 	margin-top: 16px;
 }
 
+@media (max-width: 1400px) {
+	.auction-list {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
 @media (max-width: 1000px) {
 	header {
 		flex-direction: column;
 		justify-content: space-evenly;
 	}
+	
+	.auction-list {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 950px) {
+	.filter-connected {
+		flex-direction: column;
+		justify-content: space-around;
+		height: 350px;
+	}
+}
+
+@media (max-width: 800px) {
+	.filter-unconnected {
+		flex-direction: column;
+		height: 250px;
+	}
+	
+	.filter-unconnected-search {
+		width: 230px
+	}
 }
 
 @media (max-width: 600px) {
+	header {
+		text-align: center;
+	}
+	
 	header p {
 		font-size: 20px;
+	}
+	
+	.article-card {
+		flex-direction: column;
+		width: 100%;
+		padding: 32px 0;
+	}
+
+	.article-card-img {
+		margin-bottom: 32px;
+	}
+
+	.article-card-btns {
+		margin-top: 16px;
 	}
 }

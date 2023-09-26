@@ -8,10 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>OSNA - Accueil</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/STYLE/CSS/settings.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/STYLE/CSS/home.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/STYLE/CSS/settings.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/STYLE/CSS/home.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -24,7 +22,7 @@
 	<header>
 		<div>
 			<h2 class="title">OSNA</h2>
-			<p>Objets solidaire pour une nouvelle alternative</p>
+			<p>Objets solidaires pour une nouvelle alternative</p>
 		</div>
 		<a href="#auction"><button>Voir les enchères</button></a>
 	</header>
@@ -84,7 +82,7 @@
 				<div class="article-card-img" style="background: url(${imageServletURL}) center center / cover"></div>
 				<div>
 					<h3>${article.name}</h3>
-					<p class="article-card-p"><strong>Prix : </strong>${article.startingPrice} points</p>
+					<p class="article-card-p"><strong>Prix : </strong>${article.bestOffer != 0 ? article.bestOffer : article.startingPrice} points</p>
 					<p class="article-card-p" style="color: ${article.expiredDate ? '#DF7800' : 'inherit' };"><strong>Fin de l'enchère : </strong>${article.endDate}</p>
 					<div class="article-card-btns">
 						<c:if test="${article.expiredDate && ((sessionScope.user.id == article.idSeller && article.idUserBestOffer != 0 )|| sessionScope.user.id == article.idUserBestOffer) }">

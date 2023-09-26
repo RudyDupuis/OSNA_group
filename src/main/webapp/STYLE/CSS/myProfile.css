@@ -1,0 +1,71 @@
+.points {
+	margin: 32px 0;
+	text-align: center;
+	font-size: 16px;
+}
+
+.points strong {
+	font-family: main;
+}
+
+.update-form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.form-inputs input:not(:first-child) {
+	margin-left: 32px;
+}
+
+h2 {
+	margin: 16px 0;
+}
+
+.update-form-submit {
+	margin-top: 32px;
+}
+
+.other-btns {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	margin-top: 64px;
+}
+
+.other-btns-delete {
+	background-color: #DF7800;
+}
+
+@media (max-width: 1200px) {
+	.form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.form-inputs {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.form-inputs input:not(:first-child) {
+		margin-left: 0;
+	}
+	
+	.form-inputs input {
+		margin: 16px 0;
+	}
+}
+
+@media (max-width: 800px) {
+	.other-btns {
+		flex-direction: column;
+	}
+	
+	.other-btns-delete {
+		margin-top: 64px;
+	}
+}

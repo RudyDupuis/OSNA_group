@@ -12,7 +12,7 @@ import fr.eni.OSNA.bll.UserManager;
 import fr.eni.OSNA.bo.User;
 
 @WebServlet("/connexion")
-public class Login extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -17,10 +17,12 @@ import javax.sql.rowset.serial.SerialBlob;
 import fr.eni.OSNA.bll.ArticleManager;
 import fr.eni.OSNA.bo.Article;
 import fr.eni.OSNA.bo.User;
+import fr.eni.OSNA.messages.ErrorCode;
+import fr.eni.OSNA.messages.MessageReader;
 
 @WebServlet("/vendre-un-article")
 @MultipartConfig(maxFileSize = 1024 * 1024)
-public class SellingPage extends HttpServlet {
+public class SellingPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +34,7 @@ public class SellingPage extends HttpServlet {
 		if (request.getAttribute("articleId") != null) { 							// comes from the doPost method
 			articleId = Integer.valueOf((int) request.getAttribute("articleId"));
 		} else {
-			if (request.getParameter("articleId") != null) { 						// comes from the page
+			if (request.getParameter("articleId") != null && !request.getParameter("articleId").isEmpty()) { 						// comes from the page
 				articleId = Integer.valueOf(request.getParameter("articleId"));
 			}
 		}
@@ -88,13 +90,13 @@ public class SellingPage extends HttpServlet {
 			int postalCode = Integer.valueOf(request.getParameter("postalCode"));
 			String city = request.getParameter("city");
 			Blob imageBlob = null;
-
+			
 			try {
 				imageBlob = imageToBlob(request.getPart("image"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			;
+			
 
 			if (action.equals("create")) {
 				Article article = new Article(userId, name, categorie, imageBlob, description, startingPrice, startDate,
@@ -115,6 +117,14 @@ public class SellingPage extends HttpServlet {
 			if (action.equals("update")) {
 				int articleId = Integer.valueOf(request.getParameter("articleId"));
 				request.setAttribute("articleId", articleId);
+				
+				if(request.getPart("image").getSize() == 0) {
+					try {
+						imageBlob = articleManager.selectById(articleId).getImage();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 
 				Article article = new Article(articleId, userId, name, categorie, imageBlob, description, startingPrice,
 						startDate, endDate, street, postalCode, city);
@@ -136,6 +146,12 @@ public class SellingPage extends HttpServlet {
 
 	protected Blob imageToBlob(Part filePart) throws Exception {
 		Blob imageBlob = null;
+		
+		long fileSize = filePart.getSize();
+		
+		if (fileSize > 200*1024) {
+	        throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_IMAGE_SIZE));
+	    }
 
 		byte[] fileBytes = new byte[(int) filePart.getSize()];
 

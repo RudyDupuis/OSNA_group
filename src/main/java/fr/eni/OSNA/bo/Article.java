@@ -25,6 +25,26 @@ public class Article {
 	
 	public Article(int id, int idSeller, String name, String categorie, Blob image, String description,
 			int startingPrice, int bestOffer, int idUserBestOffer, LocalDate startDate, LocalDate endDate, String street,
+			int postalCode, String city,boolean pickedUp) {
+		this.id = id;
+		this.idSeller = idSeller;
+		this.name = name;
+		this.categorie = categorie;
+		this.image = image;
+		this.description = description;
+		this.startingPrice = startingPrice;
+		this.bestOffer = bestOffer;
+		this.idUserBestOffer = idUserBestOffer;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.street = street;
+		this.postalCode = postalCode;
+		this.city = city;
+		this.pickedUp = pickedUp;
+	}
+	
+	public Article(int id, int idSeller, String name, String categorie, Blob image, String description,
+			int startingPrice, int bestOffer, int idUserBestOffer, LocalDate startDate, LocalDate endDate, String street,
 			int postalCode, String city) {
 		this.id = id;
 		this.idSeller = idSeller;

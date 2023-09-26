@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.OSNA.bo.Article;
+import fr.eni.OSNA.bo.User;
 import fr.eni.OSNA.messages.ErrorCode;
 import fr.eni.OSNA.messages.MessageReader;
 
@@ -39,7 +40,8 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 								rs.getDate("endDate").toLocalDate(),
 								rs.getString("street"),
 								rs.getInt("postalCode"),
-								rs.getString("city")
+								rs.getString("city"),
+								rs.getBoolean("pickedUp")
 							);
 			} 
 			
@@ -55,7 +57,7 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 	@Override
 	/** SELECT id, idSeller, name, categorie, image, description, startingPrice, bestOffer, idUserBestOffer, startDate, endDate, street, postalCode and city */
 	public List<Article> selectAll() throws Exception {
-	    String sql = "SELECT * FROM articles WHERE endDate > GETDATE()";
+	    String sql = "SELECT * FROM articles WHERE endDate > GETDATE() AND startDate < GETDATE()";
 	    List<Article> articles = new ArrayList<>();
 
 	    try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(sql)) {
@@ -165,13 +167,29 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
-	public void updateOffer(int bestOffer, int idUserOffer, int idArticle) throws Exception {
+	public void updateOffer(int offer, User userOffer, int idArticle) throws Exception {
 		String Sql = "UPDATE articles SET bestOffer = ?, idUserBestOffer = ? WHERE id = ?";
 		
 		try(Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(Sql)) {
-			 ps.setInt(1, bestOffer);
-			 ps.setInt(2, idUserOffer);
+			 ps.setInt(1, offer);
+			 ps.setInt(2, userOffer.getId());
 			 ps.setInt(3, idArticle);
+			 ps.executeUpdate();
+			 
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_UPDATE));
+		}
+		
+	}
+	
+	@Override
+	public void updatePickedUp(int articleId) throws Exception {
+		String Sql = "UPDATE articles SET pickedUp = 1  WHERE id = ?";
+		
+		try(Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(Sql)) {
+			 ps.setInt(1, articleId);
 			 ps.executeUpdate();
 			 
 
@@ -185,7 +203,7 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 	@Override
 	/** SELECT id, idSeller, name, categorie, image, description, startingPrice, bestOffer, idUserBestOffer, startDate, endDate, street, postalCode and city WHERE categorie*/
 	public List<Article> selectByCategorie(String categorie) throws Exception {
-		String sql = "SELECT * FROM articles WHERE categorie = ? AND endDate > GETDATE()";
+		String sql = "SELECT * FROM articles WHERE categorie = ? AND endDate > GETDATE() AND startDate < GETDATE()";
 	    List<Article> articles = new ArrayList<>();
 
 	    try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(sql)) {
@@ -222,7 +240,7 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 	@Override
 	/** SELECT id, idSeller, name, categorie, image, description, startingPrice, bestOffer, idUserBestOffer, startDate, endDate, street, postalCode and city WHERE keyword */
 	public List<Article> selectByKeyword(String keyword) throws Exception {
-		String sql = "SELECT * FROM articles WHERE name LIKE ?  AND endDate > GETDATE()";
+		String sql = "SELECT * FROM articles WHERE name LIKE ?  AND endDate > GETDATE() AND startDate < GETDATE()";
 	    List<Article> articles = new ArrayList<>();
 
 	    try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(sql)) {
@@ -403,5 +421,4 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 
 	    return articles;
 	}
-
 }
