@@ -61,7 +61,7 @@
 		<c:if test="${userExists && sessionScope.user.id != article.idSeller}">
 			<form method="POST" action="">
 				<input type="hidden" value="${article.id}" name="articleId" />
-				<input type="number" placeholder="${article.bestOffer != 0 ? article.bestOffer + 5 : article.startingPrice + 5} Points" name="points" />
+				<input type="number" placeholder="${article.bestOffer != 0 ? article.bestOffer + 5 : article.startingPrice + 5} Points" name="points" required/>
 				<input type="submit" value="Faire une offre" />
 			</form>
 		</c:if>

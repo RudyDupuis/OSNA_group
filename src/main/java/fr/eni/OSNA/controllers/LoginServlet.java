@@ -1,7 +1,6 @@
 package fr.eni.OSNA.controllers;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,7 @@ import fr.eni.OSNA.bo.User;
 @WebServlet("/connexion")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 	}
@@ -22,15 +21,13 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserManager userManager = UserManager.getInstance();
 		
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
-		
 		try {
-			User user = userManager.login(id, password);
+			User user = userManager.login(request.getParameter("id"), request.getParameter("password"));
 			request.getSession().setAttribute("user", user);
+			
 			response.sendRedirect(request.getContextPath() + "/");
 		} catch (Exception e) {
-			request.setAttribute("erreur", e);
+			request.setAttribute("message", e.getMessage());
 			doGet(request, response);
 		}
 	}

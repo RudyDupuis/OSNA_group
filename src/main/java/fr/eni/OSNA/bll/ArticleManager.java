@@ -1,5 +1,6 @@
 package fr.eni.OSNA.bll;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.OSNA.bo.Article;
@@ -29,19 +30,54 @@ public class ArticleManager {
 	}
 	
 	public void insert(Article article) throws Exception {
-		dao.insert(article);
+		StringBuilder error = checkInputFields(article);
+		
+		if(error != null) {
+			throw new Exception(error.toString());
+		} else {
+			dao.insert(article);
+		}
 	}
 	
 	public void update(Article article) throws Exception {
-		dao.update(article);
+		StringBuilder error = checkInputFields(article);
+		
+		if(error != null) {
+			throw new Exception(error.toString());
+		} else {
+			dao.update(article);
+		}
 	}
 	
 	public void delete(int id) throws Exception {
 		dao.deleteById(id);
 	}
 	
-	public void updateOffer(int bestOffer, User userOffer, int idArticle) throws Exception {
-		dao.updateOffer(bestOffer, userOffer, idArticle);
+	public void updateOffer(int offer, User userOffer, int idArticle) throws Exception {
+		UserManager userManager = UserManager.getInstance();
+		
+		Article article = selectById(idArticle);
+		
+		if(article.getStartingPrice() >= offer) {
+			throw new Exception("L'offre doit être supérieure à la mise à prix");
+		}
+		
+		if(article.getBestOffer() >= offer) {
+			throw new Exception("L'offre doit être supérieure à la meilleur offre");
+		}
+		
+		if(article.getBestOffer() != 0) {
+			User oldUser = userManager.selectById(article.getIdUserBestOffer());
+			userManager.updatePoints(oldUser, article.getBestOffer(), "repay");
+		}
+		
+		if(article.getIdUserBestOffer() == userOffer.getId()) {
+			throw new Exception("Votre offre est toujours la meilleure offre");
+		}
+		
+		userManager.updatePoints(userOffer, offer, "pay");
+		
+		dao.updateOffer(offer, userOffer, idArticle);
 	}
 	
 	public void updatePickedUp(int articleId) throws Exception {
@@ -70,6 +106,29 @@ public class ArticleManager {
 	
 	public List<Article> selectUserEndedSales(int idUser) throws Exception {
 		return dao.selectUserEndedSales(idUser);
+	}
+	
+	private StringBuilder checkInputFields(Article article) {
+		StringBuilder error = new StringBuilder();
+		boolean hasError = false;
+		
+		if (article.getStartDate().isBefore(LocalDate.now())) {
+		    hasError = true;
+		    error.append("La date de début ne peut pas être antérieure à aujourd'hui.\n");
+		}
+
+		if (article.getEndDate().isBefore(article.getStartDate())) {
+		    hasError = true;
+		    error.append("La date de fin ne peut pas être antérieure à la date de début.\n");
+		}
+		
+		
+		if(hasError) {
+			return error;
+		} else {
+			return null;
+		}
+	
 	}
 	
 }

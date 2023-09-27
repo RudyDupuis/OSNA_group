@@ -16,27 +16,27 @@
 	<h1>Mon Profil</h1>
 	
 	<p class="points"><strong>Mes points : </strong>${sessionScope.user.points} points</p>
-	
+
 	<form method="POST" action="" class="update-form">
 		<div class="form">
 			<h2>Nom et Prénom</h2>
 			<div class="form-inputs">
-				<input type="text" placeholder="Prénom" name="firstName" value="${sessionScope.user.firstName}" maxlength="30" required />
-				<input type="text" placeholder="Nom" name="lastName" value="${sessionScope.user.lastName}" maxlength="30" required />
+				<input type="text" placeholder="Prénom" name="firstName" value="${firstNameSave != null ? firstNameSave : sessionScope.user.firstName}" maxlength="30" required />
+				<input type="text" placeholder="Nom" name="lastName" value="${lastNameSave != null ? lastNameSave : sessionScope.user.lastName}" maxlength="30" required />
 			</div>
 			
 			<h2>Pseudo, Mail et Téléphone</h2>
 			<div class="form-inputs">
-				<input type="text" placeholder="Pseudo" name="pseudo" value="${sessionScope.user.pseudo}" maxlength="30" required/>
-				<input type="email" placeholder="Mail" name="mail" value="${sessionScope.user.mail}" maxlength="100" required/>
-				<input type="text" placeholder="Téléphone" name="phone" value="${sessionScope.user.phone}" maxlength="15" />
+				<input type="text" placeholder="Pseudo" name="pseudo" value="${pseudoSave != null ? pseudoSave : sessionScope.user.pseudo}" maxlength="30" required/>
+				<input type="email" placeholder="Mail" name="mail" value="${mailSave != null ? mailSave : sessionScope.user.mail}" maxlength="100" required/>
+				<input type="text" placeholder="Téléphone" name="phone" value="${phoneSave != null ? phoneSave : sessionScope.user.phone}" maxlength="15" />
 			</div>
 			
 			<h2>Adresse</h2>
 			<div class="form-inputs">
-				<input type="text" placeholder="Rue" name="street" value="${sessionScope.user.street}" maxlength="255" required />
-				<input type="number" placeholder="Code Postal" name="postalCode" value="${sessionScope.user.postalCode}" min="10000" min="99999" required />
-				<input type="text" placeholder="Ville" name="city" value="${sessionScope.user.city}" maxlength="100" required />
+				<input type="text" placeholder="Rue" name="street" value="${streetSave != null ? streetSave : sessionScope.user.street}" maxlength="255" required />
+				<input type="number" placeholder="Code Postal" name="postalCode" value="${postalCodeSave != null ? postalCodeSave : sessionScope.user.postalCode}" min="10000" min="99999" required />
+				<input type="text" placeholder="Ville" name="city" value="${citySave != null ? citySave : sessionScope.user.city}" maxlength="100" required />
 			</div>
 			
 			<h2>Mot de passe</h2>

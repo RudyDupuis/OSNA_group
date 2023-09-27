@@ -22,6 +22,7 @@ public class Article {
 	private String nameSeller;
 	private String nameUserBestOffer;
 	private boolean expiredDate;
+	private boolean startedDate;
 	
 	public Article(int id, int idSeller, String name, String categorie, Blob image, String description,
 			int startingPrice, int bestOffer, int idUserBestOffer, LocalDate startDate, LocalDate endDate, String street,
@@ -236,5 +237,13 @@ public class Article {
 
 	public void setNameSeller(String nameSeller) {
 		this.nameSeller = nameSeller;
+	}
+
+	public boolean isStartedDate() {
+		return startedDate;
+	}
+
+	public void setStartedDate(boolean startedDate) {
+		this.startedDate = startedDate;
 	}
 }

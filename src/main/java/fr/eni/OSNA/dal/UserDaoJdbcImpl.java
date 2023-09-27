@@ -105,8 +105,8 @@ public class UserDaoJdbcImpl implements UserDAO {
 
 			if (rs.next()) {
 
-				user = new User(rs.getInt("id"), rs.getString("pseudo"), rs.getString("firstName"),
-						rs.getString("lastName"), rs.getString("mail"), rs.getString("phone"),
+				user = new User(rs.getInt("id"), rs.getString("firstName"),
+						rs.getString("lastName"), rs.getString("pseudo"), rs.getString("mail"), rs.getString("phone"),
 						rs.getString("street"), rs.getInt("postalCode"), rs.getString("city"),
 						rs.getString("password"), rs.getInt("points"));
 				
@@ -145,8 +145,8 @@ public class UserDaoJdbcImpl implements UserDAO {
 
 			if (rs.next()) {
 				
-				user = new User(rs.getInt("id"), rs.getString("pseudo"), rs.getString("firstName"),
-						rs.getString("lastName"), rs.getString("mail"), rs.getString("phone"),
+				user = new User(rs.getInt("id"), rs.getString("firstName"),
+						rs.getString("lastName"), rs.getString("pseudo"), rs.getString("mail"), rs.getString("phone"),
 						rs.getString("street"), rs.getInt("postalCode"), rs.getString("city"),
 						rs.getString("password"), rs.getInt("points"));
 				
@@ -162,19 +162,57 @@ public class UserDaoJdbcImpl implements UserDAO {
 	
 	@Override
 	public void updatePoints(User user) throws Exception {
-		//TODO
+		String Sql = "UPDATE users SET points = ? WHERE id = ?";
+		
+		try(Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(Sql)) {
+			 ps.setInt(1, user.getPoints());
+			 ps.setInt(2, user.getId());
+			 ps.executeUpdate();
+			 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_UPDATE));
+		}
 	}
 
 	@Override
 	public Boolean checkUniqueMail(User user) throws Exception {
-		//TODO
-		return false;
+		String Sql = "SELECT id FROM users WHERE mail = ?";
+		
+		try(Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(Sql)) {
+			ps.setString(1, user.getMail());
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				return false;
+			} else {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_SELECT));
+		}
 	}
 
 	@Override
 	public Boolean checkUniquePseudo(User user) throws Exception {
-		//TODO
-		return false;
+		String Sql = "SELECT id FROM users WHERE pseudo = ?";
+		
+		try(Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(Sql)) {
+			ps.setString(1, user.getPseudo());
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				return false;
+			} else {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_SELECT));
+		}
 	}
 
 	@Override

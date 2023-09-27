@@ -99,7 +99,7 @@
 								<input type="submit" value="Voir" class="article-card-submit"/>
 							</form>
 						</c:if>
-						<c:if test="${!article.expiredDate && sessionScope.user.id == article.idSeller}">
+						<c:if test="${!article.startedDate && sessionScope.user.id == article.idSeller}">
 							<form method="GET" action="vendre-un-article">
 								<input type="hidden" value="${article.id}" name="articleId">
 								<input type="submit" value="Modifier" class="article-card-submit"/>

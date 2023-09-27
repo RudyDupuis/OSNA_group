@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.OSNA.bll.UserManager;
 import fr.eni.OSNA.bo.User;
+import fr.eni.OSNA.messages.ErrorCode;
+import fr.eni.OSNA.messages.MessageReader;
 
 @WebServlet("/inscription")
 public class RegisterServlet extends HttpServlet {
@@ -23,9 +25,9 @@ public class RegisterServlet extends HttpServlet {
 		UserManager userManager = UserManager.getInstance();
 		
 		User user = new User(
-		    request.getParameter("pseudo"),
 		    request.getParameter("firstName"),
 	        request.getParameter("lastName"),
+	        request.getParameter("pseudo"),
 	        request.getParameter("mail"),
 	        request.getParameter("phone"),
 	        request.getParameter("street"),
@@ -39,20 +41,31 @@ public class RegisterServlet extends HttpServlet {
 		if(user.getPassword() != null && user.getPassword().equals(confirmPassword)) {
 			try {
 				userManager.insert(user);
-				// TODO connecter l'utilisateur et le retourner vers la page d'acceuil
+	
+				/* Log in the user and send them to the home page */
+				request.getSession().setAttribute("user", user);
+				response.sendRedirect(request.getContextPath() + "/");
 			} catch (Exception e) {
 				e.printStackTrace();
-				// TODO re écrire les données dans les champs si mdp mauvais 
+				errorDirection(request, response, e.getMessage()); 
 			}
-			request.setAttribute("user", user);
-			this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 		} else {
-			request.setAttribute("erreurMdp", "Erreur sur le mot de passe et sa confirmation");
-			this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-			// TODO  re écrire les données dans les champs si mdp mauvais 
+			errorDirection(request, response, MessageReader.getMessage(ErrorCode.ERROR_DIFF_PASSWORD)); 
 		}
 	}
 	
 	private void errorDirection(HttpServletRequest request,  HttpServletResponse response, String message) throws ServletException, IOException {
+		request.setAttribute("firstNameSave", request.getParameter("firstName"));
+		request.setAttribute("lastNameSave", request.getParameter("lastName"));
+		request.setAttribute("pseudoSave", request.getParameter("pseudo"));
+		request.setAttribute("mailSave", request.getParameter("mail"));
+		request.setAttribute("phoneSave", request.getParameter("phone"));
+		request.setAttribute("streetSave", request.getParameter("street"));
+		request.setAttribute("postalCodeSave", request.getParameter("postalCode"));
+		request.setAttribute("citySave", request.getParameter("city"));
+		
+		request.setAttribute("message", message);
+		
+		doGet(request, response);
 	}
 }

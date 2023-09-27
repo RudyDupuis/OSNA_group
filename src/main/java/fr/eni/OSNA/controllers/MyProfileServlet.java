@@ -31,16 +31,15 @@ public class MyProfileServlet extends HttpServlet {
 
 		if ("update".equals(action)) {
 			if (!request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
-				request.setAttribute("message", MessageReader.getMessage(ErrorCode.ERROR_DIFF_PASSWORD));
-				doGet(request, response);
+				errorDirection(request, response, MessageReader.getMessage(ErrorCode.ERROR_DIFF_PASSWORD));
 					
 			}  else {
 			
 				User user = new User(
 						userId,
-						request.getParameter("pseudo"),
 						request.getParameter("firstName"),
 					    request.getParameter("lastName"),
+					    request.getParameter("pseudo"),
 					    request.getParameter("mail"),
 					    request.getParameter("phone"),
 					    request.getParameter("street"),
@@ -60,16 +59,7 @@ public class MyProfileServlet extends HttpServlet {
 					doGet(request, response);
 	
 				} catch (Exception e) {
-					request.setAttribute("pseudoValue", user.getPseudo());
-					request.setAttribute("firstNameValue", user.getFirstName());
-					request.setAttribute("lastNameValue", user.getLastName());
-					request.setAttribute("mailValue", user.getMail());
-					request.setAttribute("phoneValue", user.getPhone());
-					request.setAttribute("streetValue", user.getStreet());
-					request.setAttribute("postalCodeValue", user.getPostalCode());
-					request.setAttribute("cityValue", user.getCity());
-					        
-					doGet(request, response);
+					errorDirection(request, response, e.getMessage());
 				}
 			}
 			
@@ -97,5 +87,20 @@ public class MyProfileServlet extends HttpServlet {
 				doGet(request, response);
 			}
 		}
+	}
+	
+	private void errorDirection(HttpServletRequest request,  HttpServletResponse response, String message) throws ServletException, IOException {
+		request.setAttribute("firstNameSave", request.getParameter("firstName"));
+		request.setAttribute("lastNameSave", request.getParameter("lastName"));
+		request.setAttribute("pseudoSave", request.getParameter("pseudo"));
+		request.setAttribute("mailSave", request.getParameter("mail"));
+		request.setAttribute("phoneSave", request.getParameter("phone"));
+		request.setAttribute("streetSave", request.getParameter("street"));
+		request.setAttribute("postalCodeSave", request.getParameter("postalCode"));
+		request.setAttribute("citySave", request.getParameter("city"));
+		
+		request.setAttribute("message", message);
+		
+		doGet(request, response);
 	}
 }
