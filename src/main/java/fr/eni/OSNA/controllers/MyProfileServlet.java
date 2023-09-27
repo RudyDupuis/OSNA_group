@@ -49,7 +49,7 @@ public class MyProfileServlet extends HttpServlet {
 					    );
 					
 				try {
-					userManager.update(user);
+					userManager.update(user, userSession);
 						
 					/* Reconnect the user to retrieve the correct information in the session */
 					User userConnected = userManager.login(user.getPseudo(), user.getPassword());
