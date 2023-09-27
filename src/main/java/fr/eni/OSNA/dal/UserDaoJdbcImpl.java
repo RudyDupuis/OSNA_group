@@ -161,14 +161,17 @@ public class UserDaoJdbcImpl implements UserDAO {
 	}
 	
 	@Override
-	public void updatePoints(User user) throws Exception {
-		String Sql = "UPDATE users SET points = ? WHERE id = ?";
+public void updatePoints(User user) throws Exception {
 		
-		try(Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(Sql)) {
-			 ps.setInt(1, user.getPoints());
-			 ps.setInt(2, user.getId());
-			 ps.executeUpdate();
-			 
+		String sqlUpdatePoints = "UPDATE users SET points = ? WHERE id = ?";
+
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement preparedStatement = cnx.prepareStatement(sqlUpdatePoints)) {
+			
+			preparedStatement.setInt(1, user.getPoints());
+			preparedStatement.setInt(2, user.getId());
+			preparedStatement.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_UPDATE));
@@ -177,43 +180,49 @@ public class UserDaoJdbcImpl implements UserDAO {
 
 	@Override
 	public Boolean checkUniqueMail(User user) throws Exception {
-		String Sql = "SELECT id FROM users WHERE mail = ?";
 		
-		try(Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(Sql)) {
-			ps.setString(1, user.getMail());
-			ResultSet rs = ps.executeQuery();
+		String sqlCheckUniqueMail = "SELECT COUNT(*) FROM users WHERE mail = ?";
+
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement preparedStatement = cnx.prepareStatement(sqlCheckUniqueMail)) {
 			
-			if (rs.next()) {
-				return false;
-			} else {
-				return true;
+			preparedStatement.setString(1, user.getMail());
+		    ResultSet resultSet = preparedStatement.executeQuery();
+		    
+		        if (resultSet.next()) {
+					return false;
+				} else {
+					return true;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_SELECT));
 			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_SELECT));
 		}
-	}
 
 	@Override
 	public Boolean checkUniquePseudo(User user) throws Exception {
-		String Sql = "SELECT id FROM users WHERE pseudo = ?";
 		
-		try(Connection cnx = ConnectionProvider.getConnection(); PreparedStatement ps = cnx.prepareStatement(Sql)) {
-			ps.setString(1, user.getPseudo());
-			ResultSet rs = ps.executeQuery();
+		String sqlCheckUniquePseudo = "SELECT COUNT(*) FROM users WHERE pseudo = ?";
+
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement preparedStatement = cnx.prepareStatement(sqlCheckUniquePseudo)) {
 			
-			if (rs.next()) {
-				return false;
-			} else {
-				return true;
+			preparedStatement.setString(1, user.getPseudo());
+		    ResultSet resultSet = preparedStatement.executeQuery();
+		    
+		        if (resultSet.next()) {
+					return false;
+				} else {
+					return true;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_SELECT));
 			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new Exception(MessageReader.getMessage(ErrorCode.ERROR_SELECT));
 		}
-	}
 
 	@Override
 	public String getPseudo(int id) throws Exception {

@@ -33,13 +33,13 @@
 			<h2>Adresse</h2>
 			<div class="form-inputs">
 				<input type="text" placeholder="Rue" name="street" value="${streetSave}" maxlength="255" required />
-				<input type="number" placeholder="Code Postal" name="postalCode" value="${postalCodeSave}" min="10000" max="99999" required />
+				<input type="number" placeholder="Code Postal" name="postalCode" value="${postalCodeSave}" min="10000" max="999999" required />
 				<input type="text" placeholder="Ville" name="city" value="${citySave}" maxlength="100" required />
 			</div>
 			
 			<h2>Mot de passe</h2>
 			<div class="form-inputs">
-				<input type="password" placeholder="Mot de passe" name="password"  maxlength="50" required />
+				<input type="password" placeholder="Mot de passe" name="password" maxlength="50" required />
 				<input type="password" placeholder="Confirmer le mot de passe" name="confirmPassword" maxlength="50" required />
 			</div>
 		</div>
