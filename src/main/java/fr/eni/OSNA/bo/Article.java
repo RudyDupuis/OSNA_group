@@ -2,6 +2,7 @@ package fr.eni.OSNA.bo;
 
 import java.sql.Blob;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Article {
 	private int id;
@@ -23,62 +24,7 @@ public class Article {
 	private String nameUserBestOffer;
 	private boolean expiredDate;
 	private boolean startedDate;
-	
-	public Article(int id, int idSeller, String name, String categorie, Blob image, String description,
-			int startingPrice, int bestOffer, int idUserBestOffer, LocalDate startDate, LocalDate endDate, String street,
-			int postalCode, String city,boolean pickedUp) {
-		this.id = id;
-		this.idSeller = idSeller;
-		this.name = name;
-		this.categorie = categorie;
-		this.image = image;
-		this.description = description;
-		this.startingPrice = startingPrice;
-		this.bestOffer = bestOffer;
-		this.idUserBestOffer = idUserBestOffer;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.street = street;
-		this.postalCode = postalCode;
-		this.city = city;
-		this.pickedUp = pickedUp;
-	}
-	
-	public Article(int id, int idSeller, String name, String categorie, Blob image, String description,
-			int startingPrice, int bestOffer, int idUserBestOffer, LocalDate startDate, LocalDate endDate, String street,
-			int postalCode, String city) {
-		this.id = id;
-		this.idSeller = idSeller;
-		this.name = name;
-		this.categorie = categorie;
-		this.image = image;
-		this.description = description;
-		this.startingPrice = startingPrice;
-		this.bestOffer = bestOffer;
-		this.idUserBestOffer = idUserBestOffer;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.street = street;
-		this.postalCode = postalCode;
-		this.city = city;
-	}
-	
-	public Article(int id, int idSeller, String name, String categorie, Blob image, String description,
-			int startingPrice, LocalDate startDate, LocalDate endDate, String street,
-			int postalCode, String city) {
-		this.id = id;
-		this.idSeller = idSeller;
-		this.name = name;
-		this.categorie = categorie;
-		this.image = image;
-		this.description = description;
-		this.startingPrice = startingPrice;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.street = street;
-		this.postalCode = postalCode;
-		this.city = city;
-	}
+	private String formattedEndDate;
 	
 	public Article(int idSeller, String name, String categorie, Blob image, String description, int startingPrice,
 			LocalDate startDate, LocalDate endDate, String street, int postalCode, String city) {
@@ -93,6 +39,36 @@ public class Article {
 		this.street = street;
 		this.postalCode = postalCode;
 		this.city = city;
+		
+		this.startedDate = this.startDate.equals(LocalDate.now()) ? true : this.startDate.isBefore(LocalDate.now());
+		this.expiredDate = this.endDate.isBefore(LocalDate.now());
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		this.formattedEndDate = this.endDate.format(formatter);
+	}
+	
+	public Article(int id, int idSeller, String name, String categorie, Blob image, String description,
+			int startingPrice, LocalDate startDate, LocalDate endDate, String street,
+			int postalCode, String city) {
+		this(idSeller, name, categorie, image, description, startingPrice, startDate, endDate, street, postalCode, city);
+		this.id = id;
+	}
+	
+	public Article(int id, int idSeller, String name, String categorie, Blob image, String description,
+			int startingPrice, int bestOffer, int idUserBestOffer, LocalDate startDate, LocalDate endDate, String street,
+			int postalCode, String city,boolean pickedUp) {
+		this(idSeller, name, categorie, image, description, startingPrice, startDate, endDate, street, postalCode, city);
+		this.id = id;
+		this.pickedUp = pickedUp;
+	}
+	
+	public Article(int id, int idSeller, String name, String categorie, Blob image, String description,
+			int startingPrice, int bestOffer, int idUserBestOffer, LocalDate startDate, LocalDate endDate, String street,
+			int postalCode, String city) {
+		this(idSeller, name, categorie, image, description, startingPrice, startDate, endDate, street, postalCode, city);
+		this.id = id;
+		this.bestOffer = bestOffer;
+		this.idUserBestOffer = idUserBestOffer;
 	}
 
 	public int getId() {
@@ -245,5 +221,13 @@ public class Article {
 
 	public void setStartedDate(boolean startedDate) {
 		this.startedDate = startedDate;
+	}
+
+	public String getFormattedEndDate() {
+		return formattedEndDate;
+	}
+
+	public void setFormattedEndDate(String formattedEndDate) {
+		this.formattedEndDate = formattedEndDate;
 	}
 }

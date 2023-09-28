@@ -82,7 +82,7 @@
 				<div>
 					<h3>${article.name}</h3>
 					<p class="article-card-p"><strong>Prix : </strong>${article.bestOffer != 0 ? article.bestOffer : article.startingPrice} points</p>
-					<p class="article-card-p" style="color: ${article.expiredDate ? '#DF7800' : 'inherit' };"><strong>Fin de l'enchère : </strong>${article.endDate}</p>
+					<p class="article-card-p" style="color: ${article.expiredDate ? '#DF7800' : 'inherit' };"><strong>Fin de l'enchère : </strong>${article.formattedEndDate}</p>
 					<div class="article-card-btns">
 						<c:if test="${article.expiredDate && ((sessionScope.user.id == article.idSeller && article.idUserBestOffer != 0 )|| sessionScope.user.id == article.idUserBestOffer) }">
 							<form method="GET" action="vente-terminee">

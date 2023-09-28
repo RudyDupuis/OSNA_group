@@ -1,7 +1,6 @@
 package fr.eni.OSNA.controllers;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,7 +25,6 @@ public class HomeServlet extends HttpServlet {
 		} else {
 			try {
 				List<Article> articles = articleManager.selectAll();
-				setExpiredAndStartedDate(articles);
 				request.setAttribute("articles", articles);
 				
 			} catch (Exception e) {
@@ -48,7 +46,6 @@ public class HomeServlet extends HttpServlet {
 			if(!request.getParameter("filterSearch").isEmpty()) {
 				try {
 					articles = articleManager.selectByKeyword(request.getParameter("filterSearch"));
-					setExpiredAndStartedDate(articles);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +55,6 @@ public class HomeServlet extends HttpServlet {
 				if(!request.getParameter("categorie").equals("all")) {
 					try {
 						articles = articleManager.selectByCategorie(request.getParameter("categorie"));
-						setExpiredAndStartedDate(articles);
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -74,7 +70,6 @@ public class HomeServlet extends HttpServlet {
 				if(action.equals("currentAuction")){
 					try {
 						articles = articleManager.selectUserCurrentAuction(userId);
-						setExpiredAndStartedDate(articles);
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -84,7 +79,6 @@ public class HomeServlet extends HttpServlet {
 				if(action.equals("wonAuction")){
 					try {
 						articles = articleManager.selectUserWonAuction(userId);
-						setExpiredAndStartedDate(articles);
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -94,7 +88,6 @@ public class HomeServlet extends HttpServlet {
 				if(action.equals("mySales")){
 					try {
 						articles = articleManager.selectUserSales(userId);
-						setExpiredAndStartedDate(articles);
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -104,7 +97,6 @@ public class HomeServlet extends HttpServlet {
 				if(action.equals("myEndedSales")){
 					try {
 						articles = articleManager.selectUserEndedSales(userId);
-						setExpiredAndStartedDate(articles);
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -115,16 +107,6 @@ public class HomeServlet extends HttpServlet {
 		request.setAttribute("articles", articles);
 		
 		doGet(request, response);
-	}
-	
-	private void setExpiredAndStartedDate(List<Article> articles) {
-		for (Article article : articles) {
-			boolean EndBeforeNow = article.getEndDate().isBefore(LocalDate.now());
-			article.setExpiredDate(EndBeforeNow);
-			
-			boolean StartBeforeNow = article.getStartDate().equals(LocalDate.now()) ? true : article.getStartDate().isBefore(LocalDate.now());
-			article.setStartedDate(StartBeforeNow);
-		}
 	}
 
 }

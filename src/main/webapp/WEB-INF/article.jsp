@@ -55,7 +55,7 @@
 				<strong>Vendeur : </strong> <a href="${pageContext.request.contextPath}/profil-utilisateur?userId=${article.idSeller}">${article.nameSeller}</a>
 			</p>
 			<p>
-				<strong>Fin de l'enchère : </strong>${article.endDate}</p>
+				<strong>Fin de l'enchère : </strong>${article.formattedEndDate}</p>
 		</div>
 		
 		<c:if test="${userExists && sessionScope.user.id != article.idSeller}">

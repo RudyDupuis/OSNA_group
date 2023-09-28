@@ -63,7 +63,7 @@ public class UserManager {
 			error.append(MessageReader.getMessage(ErrorCode.ERROR_MAIL_NOTUNIQUE)).append("\n");
 		}
 		
-		if(!user.getMail().equals(userSession.getMail()) && !dao.checkUniquePseudo(user)) {
+		if(!user.getPseudo().equals(userSession.getPseudo()) && !dao.checkUniquePseudo(user)) {
 			hasError = true;
 			error.append(MessageReader.getMessage(ErrorCode.ERROR_PSEUDO_NOTUNIQUE)).append("\n");
 		}
