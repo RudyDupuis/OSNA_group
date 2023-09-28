@@ -39,7 +39,7 @@
 			
 			<h2>Mot de passe</h2>
 			<div class="form-inputs">
-				<input type="password" placeholder="Mot de passe" name="password"  maxlength="50" required />
+				<input type="password" title="une majuscule, une minuscule, un chiffre et un caractère parmit @#$%^&+=!." placeholder="Mot de passe" name="password"  maxlength="50" required />
 				<input type="password" placeholder="Confirmer le mot de passe" name="confirmPassword" maxlength="50" required />
 			</div>
 		</div>

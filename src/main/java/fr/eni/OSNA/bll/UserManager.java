@@ -100,7 +100,7 @@ public class UserManager {
 	public void updatePoints(User user, int offer, String action) throws Exception {
 		if(action.equals("pay")) {	
 			if(user.getPoints() < offer) {
-				throw new Exception("Vous n'avez pas assez de points pour faire cette offre");
+				throw new Exception(MessageReader.getMessage(ErrorCode.NOT_ENOUGH_POINTS));
 			}
 			
 			user.setPoints(user.getPoints() - offer);
@@ -119,27 +119,27 @@ public class UserManager {
 		
 		if (!user.getFirstName().matches("[\\p{L}]{3,}") || !user.getLastName().matches("[\\p{L}]{3,}")) {
 		    hasError = true;
-		    error.append("Le champ 'Prénom' et 'Nom' ne doivent contenir que des lettres et avoir au moins 3 caractères.\n");
+		    error.append(MessageReader.getMessage(ErrorCode.REGEX_NAME));
 		}
 
 		if(!user.getMail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
 			hasError = true;
-		    error.append("Le format du mail n'est pas valide.\n");
+		    error.append(MessageReader.getMessage(ErrorCode.REGEX_MAIL));
 		}
 		
 		if(!user.getPhone().matches("^(\\+(33|0)[1-9](?:[0-9]{2}){4}|0[1-9][0-9]{8})$")) {
 			hasError = true;
-		    error.append("Le format du téléphone n'est pas valide.\n");
+		    error.append(MessageReader.getMessage(ErrorCode.REGEX_PHONE));
 		}
 		
 		if(!user.getPseudo().matches("^[a-zA-Z0-9_-]{3,}")) {
 			hasError = true;
-		    error.append("Le pseudo doit faire plus de 3 caractères et contenir des chiffres et des lettres uniquement.\n");
+		    error.append(MessageReader.getMessage(ErrorCode.REGEX_PSEUDO));
 		}
 		
 		if(!user.getPassword().matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!.]).{8,}$")) {
 			hasError = true;
-		    error.append("Le mot de passe doit faire plus de 8 caractères et contenir au moins un chiffre, une minuscule, une majuscule et un caractère spécial.\n");
+		    error.append(MessageReader.getMessage(ErrorCode.REGEX_PASSWORD));
 		}
 		
 		if(hasError) {

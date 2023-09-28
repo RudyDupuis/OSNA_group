@@ -18,6 +18,7 @@ import fr.eni.OSNA.bll.ArticleManager;
 import fr.eni.OSNA.bo.Article;
 import fr.eni.OSNA.bo.User;
 import fr.eni.OSNA.messages.ErrorCode;
+import fr.eni.OSNA.messages.InfoCode;
 import fr.eni.OSNA.messages.MessageReader;
 
 @WebServlet("/vendre-un-article")
@@ -74,7 +75,7 @@ public class SellingPageServlet extends HttpServlet {
 				}
 
 			} else {
-				request.setAttribute("message", "Êtes-vous sûr de vouloir supprimer cet article ?");
+				request.setAttribute("message", MessageReader.getMessage(InfoCode.SURE_DELETE_ARTICLE));
 				request.setAttribute("sure", "true");
 				doGet(request, response);
 			}
@@ -105,7 +106,7 @@ public class SellingPageServlet extends HttpServlet {
 				try {
 					articleManager.insert(article);
 					request.setAttribute("articleId", article.getId());
-					request.setAttribute("message", "Votre article a été ajouté");
+					request.setAttribute("message", MessageReader.getMessage(InfoCode.ADD_ARTICLE));
 					doGet(request, response);
 
 				} catch (Exception e) {
@@ -131,7 +132,7 @@ public class SellingPageServlet extends HttpServlet {
 
 				try {
 					articleManager.update(article);
-					request.setAttribute("message", "Votre article a été modifié");
+					request.setAttribute("message", MessageReader.getMessage(InfoCode.UPDATE_ARTICLE));
 					doGet(request, response);
 
 				} catch (Exception e) {

@@ -7,6 +7,8 @@ import fr.eni.OSNA.bo.Article;
 import fr.eni.OSNA.bo.User;
 import fr.eni.OSNA.dal.ArticleDAO;
 import fr.eni.OSNA.dal.DAOFactory;
+import fr.eni.OSNA.messages.ErrorCode;
+import fr.eni.OSNA.messages.MessageReader;
 
 public class ArticleManager {
 	private static ArticleManager instance;
@@ -59,11 +61,11 @@ public class ArticleManager {
 		Article article = selectById(idArticle);
 		
 		if(article.getStartingPrice() >= offer) {
-			throw new Exception("L'offre doit être supérieure à la mise à prix");
+			throw new Exception(MessageReader.getMessage(ErrorCode.OFFER_HIGHER_STARTING_PRICE));
 		}
 		
 		if(article.getBestOffer() >= offer) {
-			throw new Exception("L'offre doit être supérieure à la meilleur offre");
+			throw new Exception(MessageReader.getMessage(ErrorCode.OFFER_HIGHER_BEST_OFFER));
 		}
 		
 		if(article.getBestOffer() != 0) {
@@ -72,7 +74,7 @@ public class ArticleManager {
 		}
 		
 		if(article.getIdUserBestOffer() == userOffer.getId()) {
-			throw new Exception("Votre offre est toujours la meilleure offre");
+			throw new Exception(MessageReader.getMessage(ErrorCode.OFFER_IS_BEST_OFFER));
 		}
 		
 		userManager.updatePoints(userOffer, offer, "pay");
@@ -114,12 +116,12 @@ public class ArticleManager {
 		
 		if (article.getStartDate().isBefore(LocalDate.now())) {
 		    hasError = true;
-		    error.append("La date de début ne peut pas être antérieure à aujourd'hui.\n");
+		    error.append(MessageReader.getMessage(ErrorCode.STARTDATE_SMALLER_TODAY));
 		}
 
 		if (article.getEndDate().isBefore(article.getStartDate())) {
 		    hasError = true;
-		    error.append("La date de fin ne peut pas être antérieure à la date de début.\n");
+		    error.append(MessageReader.getMessage(ErrorCode.ENDDATE_SMALLER_STARTDATE));
 		}
 		
 		

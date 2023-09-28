@@ -81,6 +81,20 @@ nav a:hover {
 	margin-left: 32px;
 }
 
+.nav-mobile {
+	display: none;
+}
+
+@media (max-width: 800px) {
+	.nav-mobile {
+		display: inline;
+	}
+	
+	.nav-desktop {
+		display: none;
+	}
+}
+
 @media (max-width: 500px) {
 	nav {
 		padding: 0 32px;

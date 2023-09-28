@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.OSNA.bll.UserManager;
 import fr.eni.OSNA.bo.User;
 import fr.eni.OSNA.messages.ErrorCode;
+import fr.eni.OSNA.messages.InfoCode;
 import fr.eni.OSNA.messages.MessageReader;
 
 @WebServlet("/mon-profil")
@@ -55,7 +56,7 @@ public class MyProfileServlet extends HttpServlet {
 					User userConnected = userManager.login(user.getPseudo(), user.getPassword());
 					request.getSession().setAttribute("user", userConnected);
 						
-					request.setAttribute("message", "Votre compte à été mis à jour");
+					request.setAttribute("message", MessageReader.getMessage(InfoCode.UPDATE_ACCOUNT));
 					doGet(request, response);
 	
 				} catch (Exception e) {
@@ -82,7 +83,7 @@ public class MyProfileServlet extends HttpServlet {
 					doGet(request, response);
 				}
 			} else {
-				request.setAttribute("message", "Êtes-vous sûr de vouloir supprimer votre compte ?");
+				request.setAttribute("message", MessageReader.getMessage(InfoCode.SURE_DELETE_ACCOUNT));
 				request.setAttribute("sure", "true");
 				doGet(request, response);
 			}

@@ -18,7 +18,7 @@
 
 		<section class="form">
 			<form method="POST" action="">
-				<input type="text" placeholder="Identifiant" name="id" required />
+				<input type="text" placeholder="Pseudo ou mail" name="id" required />
 				<input type="password" placeholder="Mot de passe" name="password" required />
 				<input type="submit" value="Connexion" />
 			</form>

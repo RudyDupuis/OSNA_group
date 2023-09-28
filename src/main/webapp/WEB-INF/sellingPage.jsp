@@ -58,9 +58,17 @@
 		</div>
 		
 		<div class="form-center">
-			<input type="number" placeholder="Mise à prix" name="startingPrice" value="${article.startingPrice}" required/>
-			<input type="date" placeholder="Date de début" name="startDate" value="${article.startDate}" required/>
-			<input type="date" placeholder="Date de fin" name="endDate" value="${article.endDate}" required/>
+			<div>
+				<input type="number" placeholder="Mise à prix" name="startingPrice" value="${article.startingPrice}" required/>
+			</div>
+			<div>
+				<label for="startDate">Date de début</label>
+				<input type="date" placeholder="Date de début" name="startDate" value="${article.startDate}" id="startDate" required/>
+			</div>
+			<div>
+				<label for="endDate">Date de fin</label>
+				<input type="date" placeholder="Date de fin" name="endDate" value="${article.endDate}" id="endDate" required/>
+			</div>
 		</div>
 
 		<div class="form-bottom">

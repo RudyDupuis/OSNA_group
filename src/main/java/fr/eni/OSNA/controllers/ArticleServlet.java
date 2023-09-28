@@ -11,6 +11,8 @@ import fr.eni.OSNA.bll.ArticleManager;
 import fr.eni.OSNA.bll.UserManager;
 import fr.eni.OSNA.bo.Article;
 import fr.eni.OSNA.bo.User;
+import fr.eni.OSNA.messages.InfoCode;
+import fr.eni.OSNA.messages.MessageReader;
 
 @WebServlet("/article")
 public class ArticleServlet extends HttpServlet {
@@ -59,10 +61,9 @@ public class ArticleServlet extends HttpServlet {
 		
 		try {
 			articleManager.updateOffer(points, userSession, articleId);
-			request.setAttribute("message", "Vous avez fait une offre de " + points + " points");
+			request.setAttribute("message", MessageReader.getMessage(InfoCode.MAKE_OFFER));
 		} catch (Exception e) {
 			request.setAttribute("message", e.getMessage());
-			e.printStackTrace();
 		}
 		
 		doGet(request, response);

@@ -39,6 +39,21 @@ form {
 	width: 256px;
 }
 
+.form-center {
+	display: flex;
+}
+
+.form-center div {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	margin-left: 5px;
+}
+
+.form-center [type="number"] {
+	height: 38px;
+}
+
 textarea {
 	font-family: Arial;
 	color:#343434;
