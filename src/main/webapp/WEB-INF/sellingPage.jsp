@@ -47,10 +47,10 @@
 				</select>
 
 				<c:if test="${article.image == null}">
-					<input type="file" placeholder="Ajouter une image" accept=".jpg" name="image" required/>
+					<input type="file" placeholder="Ajouter une image" accept=".jpg, .jpeg" name="image" required/>
 				</c:if>
 				<c:if test="${article.image != null}">
-					<input type="file" placeholder="Ajouter une image" accept=".jpg" name="image"/>
+					<input type="file" placeholder="Ajouter une image" accept=".jpg, .jpeg" name="image"/>
 				</c:if> 
 			</div>
 			
