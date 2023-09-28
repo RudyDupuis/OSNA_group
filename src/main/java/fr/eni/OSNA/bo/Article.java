@@ -56,9 +56,11 @@ public class Article {
 	
 	public Article(int id, int idSeller, String name, String categorie, Blob image, String description,
 			int startingPrice, int bestOffer, int idUserBestOffer, LocalDate startDate, LocalDate endDate, String street,
-			int postalCode, String city,boolean pickedUp) {
+			int postalCode, String city, boolean pickedUp) {
 		this(idSeller, name, categorie, image, description, startingPrice, startDate, endDate, street, postalCode, city);
 		this.id = id;
+		this.bestOffer = bestOffer;
+		this.idUserBestOffer = idUserBestOffer;
 		this.pickedUp = pickedUp;
 	}
 	
