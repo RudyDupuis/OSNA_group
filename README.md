@@ -20,3 +20,5 @@ Le projet OSNA a été développé en utilisant les technologies suivantes :
 - **Dépendances :**  jstl 1.2 / mssql-jdbc 12.4.0
 
 [Lien vers la documentation](https://hickory-dormouse-c7a.notion.site/OSNA-9c6dd84194be4c268364f9b418f7c0ac?pvs=74)
+
+[Lien vers le figma](https://www.figma.com/design/GZkTQglGJh2ydviHipXx7c/OSNA?node-id=2-9&node-type=canvas&t=evHaaFGqv4ZVqkeS-0)
