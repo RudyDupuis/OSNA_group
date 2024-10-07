@@ -19,10 +19,4 @@ Le projet OSNA a été développé en utilisant les technologies suivantes :
 - Base de donnée sous Transact-SQL
 - **Dépendances :**  jstl 1.2 / mssql-jdbc 12.4.0
 
-### L’équipe
-
-- Gaël Bretagne [www.linkedin.com/in/gaël-bretagne](http://www.linkedin.com/in/ga%C3%ABl-bretagne)
-- Henrik Hersant  [www.linkedin.com/in/henrik-hersant](http://www.linkedin.com/in/henrik-hersant-267620142)
-- Rudy Dupuis [www.linkedin.com/in/rudy-dupuis/](http://www.linkedin.com/in/rudy-dupuis/)
-
-[Lien vers la documentation](https://hickory-dormouse-c7a.notion.site/ENI-Sortir-2f9ad0e7548a4f24ab5376d226d77cce)
+[Lien vers la documentation](https://hickory-dormouse-c7a.notion.site/OSNA-9c6dd84194be4c268364f9b418f7c0ac?pvs=74)
